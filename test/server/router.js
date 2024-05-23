@@ -1,0 +1,55 @@
+import { Router } from "express";
+import * as controller from "./controllers/appController.js";
+import auth,{ localVariable } from "./middleware/auth.js";
+import { registerMail } from "./controllers/mailer.js";
+const router = Router();
+
+router.route("/register").post(controller.userRegister);
+router.route("/registerMail").post(registerMail);
+router.route("/login").post(controller.login);
+router.route("/profile/:username").post(auth, controller.profile);
+router.route("/authenticate").post(controller.verifyUser, (req,res) => res.status(200).send({ msg: "User exist" }));
+router.route("/saveRecording/:username").post(controller.saveRecording);
+router.route("/logFile").post(controller.saveLog);
+router.route("/submitAnswersheet").post(controller.saveAnswersheet);
+router.route("/allotSystem").post(controller.allotSystem);
+
+router.route("/generateOtp").get(controller.verifyUser, localVariable, controller.generateOTP);
+router.route("/verifyOtp").get(controller.verifyUser, controller.verifyOTP);
+router.route("/createResetSession").get(controller.createResetSession);
+router.route("/getUserInfo").get(controller.getUserInfo);
+router.route("/getUser/:username/:type").get(controller.getUser);
+router.route("/getQuestion").get(controller.getQuestion);
+router.route("/get2Question/:examname").get(controller.get2Question);
+router.route("/list/:listItem").get(controller.getListAdmin);
+router.route("/examVerify").get(controller.verifyExam)
+router.route("/listexam/:type/:username/:add/:examname").get(controller.getExam);
+router.route("/listexamEvaluator/:username/:admin/:exam").get(controller.getExamEvaluator);
+router.route("/getExamReq/:EvQs/:username").get(controller.getExamReq);
+router.route("/getAcceptedExamRequest/:EvQs/:username").get(controller.getAcceptedExamReq);
+router.route("/getNotification").get(controller.getNotification);
+router.route("/getCenter").get(controller.getCenter);
+router.route("/evqs/:examname").get(controller.bottomHallticket);
+router.route("/user/profile/:username").get(controller.getUserInfoLogin);
+router.route("/verify/registerExam/:username/:exam/:get").get(controller.verifyRegisterExam);
+router.route("/getRegisteredStudents/:examname").get(controller.getRegisteredStudents);
+router.route("/allotcenter").get(controller.allotCenters);
+router.route("/getlogFile/:username").get(controller.getLog);
+router.route("/generatehallticket/:examname").get(controller.generateHallticket);
+router.route("/getHallticket/:examname/:username").get(controller.getHallticket);
+router.route("/getAnswerSheet/:examname/:adminame").get(controller.getAnswerSheet);
+router.route('/getProfilek/:credential/:name').get(controller.getProfilek);
+
+router.route("/resetPassword").put(controller.verifyUser, controller.resetPassword);
+router.route("/updateuser").put(auth, controller.updateUser);
+router.route("/updateStudent").put(auth, controller.student);
+router.route("/updateExam").put(auth, controller.createExam);
+router.route("/addCenter/Exam").put(auth, controller.updateExam);
+router.route("/updateEvaluator").put(auth, controller.updateEvQS);
+router.route("/updateQsetter").put(auth, controller.updateEvQS);
+router.route("/acceptOrdeny").put(auth, controller.acceptOrdeny);
+router.route("/saveQuestionPaper").put(auth, controller.saveExam);
+router.route("/submitQuestionPaper/:type").put(auth, controller.submitExam);
+router.route("/registerExam/").put(auth, controller.registerExam);
+router.route("/updateExamEvaluator").put(controller.updateExamEvaluator);
+export default router;

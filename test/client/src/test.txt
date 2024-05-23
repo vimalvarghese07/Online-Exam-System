@@ -1,0 +1,32 @@
+db.centers.insert(
+    {
+        Center:[
+            {centername:"CEC1",capacity:"1",address:"cherthala1"},
+            {centername:"CEC2",capacity:"2",address:"cherthala2"},
+            {centername:"CEC3",capacity:"3",address:"cherthala3"},
+            {centername:"CEC4",capacity:"5",address:"cherthala4"},
+            {centername:"CEC5",capacity:"11",address:"cherthala5"},
+            {centername:"CEC6",capacity:"2",address:"cherthala6"},
+            {centername:"CEC7",capacity:"3",address:"cherthala7"},
+            {centername:"CEC8",capacity:"5",address:"cherthala8"},
+            {centername:"CEC9",capacity:"4",address:"cherthala9"},
+            {centername:"CEC10",capacity:"1",address:"cherthala10"}
+            ]
+    }
+    )
+
+
+db.centers.insert(
+    {
+        Center: {
+            centername:cec,
+            capacity:1,
+            adress:cherthala
+        },
+        Center: {
+            centername:cec2,
+            capacity:2,
+            adress:cherthala2
+        },
+    }
+)
